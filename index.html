@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Netto Bedrijfsuitgave (via bonus)</title>
+  <title>Netto Uitgave (via Incentive)</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.png" type="image/png" />
 </head>
@@ -11,33 +11,34 @@
   <div class="dashboard-bg">
     <header class="logo-header">
       <img src="https://www.veerenstael.nl/wp-content/uploads/2020/06/logo-veerenstael-wit.png" alt="Veerenstael Logo" class="veerenstael-logo" />
-      <div class="subtitle-title">Netto bedrijfsuitgave (betaald uit bonus)</div>
+      <div class="subtitle-title">Netto Uitgave (betaald uit Incentive)</div>
     </header>
 
     <div class="main-card">
       <div class="header center-header">
         <p>
           Deze tool rekent uit hoeveel je <b>netto</b> zelf kwijt bent aan een uitgave die
-          met je <b>bruto bonus</b> wordt verrekend. De volgorde van rekenen:
-          <br />1) eventuele bijdrage van Veerenstael eraf, 2) btw verwijderen,
-          3) verrekenen met je BT-LH% (witte tabel).
+          met je <b>Incentive</b> wordt verrekend. De volgorde van rekenen:
+          <br />1) (eventuele bijdrage) van Veerenstael eraf, 2) btw verrekenen,
+          3) verrekenen met je BT-LH% (vanuit witte tabel), zie loonstrook.
         </p>
       </div>
 
       <div class="content-grid">
         <section class="input-pane">
           <form id="bonus-tool-form">
-            <label for="website-bedrag">Bedrag op website (€)</label>
+            <label for="website-bedrag">Bedrag aankoop (€)</label>
             <input type="number" id="website-bedrag" min="0" step="0.01" placeholder="bijv. 1000" required />
 
             <label for="btw-tarief">BTW-tarief</label>
             <select id="btw-tarief">
               <option value="21">21%</option>
               <option value="9">9%</option>
+              <option value="6">6%</option>
               <option value="0">0%</option>
             </select>
 
-            <label for="incl-btw">Bedrag op website is inclusief btw?</label>
+            <label for="incl-btw">Is bedrag aankoop inclusief btw?</label>
             <select id="incl-btw">
               <option value="ja" selected>Ja, incl. btw</option>
               <option value="nee">Nee, excl. btw</option>
@@ -46,7 +47,7 @@
             <label for="veerenstael-bijdrage">Bijdrage Veerenstael (€)</label>
             <input type="number" id="veerenstael-bijdrage" min="0" step="0.01" placeholder="bijv. 400" value="0" />
 
-            <label for="bt-lh">BT-LH % (witte tabel)</label>
+            <label for="bt-lh">BT-LH % (witte tabel), zie loonstrook rechtsboven</label>
             <input type="number" id="bt-lh" min="0" max="100" step="0.001" placeholder="bijv. 50.330" required />
 
             <div class="button-row">
@@ -73,3 +74,4 @@
   <script src="main.js"></script>
 </body>
 </html>
+
