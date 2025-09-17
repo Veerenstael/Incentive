@@ -179,6 +179,28 @@ button.reset-btn:hover {
   word-break: break-word;
 }
 
+/* Uitlijning voor de kostenregels */
+.kv-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 16px;
+  align-items: baseline;
+}
+
+.kv-row {
+  display: contents;
+}
+
+.kv-label {
+  color: #d3ddf0;
+}
+
+.kv-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 @media (max-width: 950px) {
   .main-card {
     padding: 24px 6vw;
