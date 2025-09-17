@@ -41,13 +41,12 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
 
   // Uitlijning in 2 kolommen met volledig uitgeschreven labels
   const rows = [
-    ["Aankoopbedrag op de website", `€ ${formatEuro(websiteBedrag)}`],
+    ["Aankoopbedrag", `€ ${formatEuro(websiteBedrag)}`],
     ["Bijdrage van Veerenstael", `− € ${formatEuro(bijdrage)}`],
-    ["Tussenstand na bijdrage", `€ ${formatEuro(naBijdrage)}`],
-    [`Omzetbelasting (${btwTariefPct}%)`, `− € ${formatEuro(btwBedrag)}`],
-    ["Bedrag exclusief btw", `€ ${formatEuro(exclBtw)}`],
-    [`Netto bedrag dat de medewerker zelf betaalt (BT-LH ${pctDisplay(btLhPct)}%)`, `€ ${formatEuro(nettoPersoonlijk)}`],
-    ["Besparing door verrekening met loonheffing", `€ ${formatEuro(besparingDoorBonus)}`]
+    ["<i>Na bijdrage</i>", `€ ${formatEuro(naBijdrage)}`],
+    [`Omzetbelasting (btw) (${btwTariefPct}%)`, `− € ${formatEuro(btwBedrag)}`],
+    ["<i>Bedrag exclusief btw</i>", `€ ${formatEuro(exclBtw)}`],
+    [`Netto bijdrage medewerker`, `€ ${formatEuro(nettoPersoonlijk)}`]   
   ];
 
   let html = '<div class="kv-grid">';
@@ -64,3 +63,4 @@ document.getElementById("bonus-tool-form").addEventListener("reset", function ()
     document.getElementById("info").textContent = "";
   }, 0);
 });
+
