@@ -19,8 +19,9 @@
         <p>
           Deze tool rekent uit hoeveel je als medewerker <b>netto</b> kwijt bent aan een uitgave die
           je met je <b>Incentive</b> betaald. De volgorde van berekenen:
-          <br />(1) (eventuele bijdrage) van Veerenstael van het bedrag af, 2) btw verrekenen,
-          3) verrekenen met je BT-LH% (vanuit witte tabel), zie loonstrook.
+          <br />(1) (eventuele bijdrage) van Veerenstael van het bedrag af; 
+          <br />(2) btw verrekenen;
+          <br />(3) verrekenen met je BT-LH% (vanuit witte tabel), zie loonstrook.
         </p>
       </div>
 
@@ -41,7 +42,7 @@
             <label for="veerenstael-bijdrage">Bijdrage Veerenstael (€)</label>
             <input type="number" id="veerenstael-bijdrage" min="0" step="0.01" placeholder="bijv. 400" value="0" />
 
-            <label for="bt-lh">BT-LH % (witte tabel), zie loonstrook rechtsboven</label>
+            <label for="bt-lh">Bijzonder tarief Loonheffing (BT-LH %, zie loonstrook rechtsboven)</label>
             <input type="number" id="bt-lh" min="0" max="100" step="0.001" placeholder="bijv. 50.330" required />
 
             <div class="button-row">
@@ -53,7 +54,7 @@
 
         <section class="output-pane">
           <div id="resultaat" class="result-block">
-            <h2>Netto bedrag dat je zelf betaalt</h2>
+            <h2>Netto bijdrage medewerker</h2>
             <div class="result-bedrag">€<span id="netto-bedrag">0,00</span></div>
           </div>
 
@@ -68,3 +69,4 @@
   <script src="main.js"></script>
 </body>
 </html>
+
