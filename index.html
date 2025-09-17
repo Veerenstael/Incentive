@@ -1,70 +1,67 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bijtelling Tool</title>
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Favicon toegevoegd -->
-  <link rel="icon" href="favicon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netto Bedrijfsuitgave (via bonus)</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.png" type="image/png" />
 </head>
 <body>
   <div class="dashboard-bg">
     <header class="logo-header">
       <img src="https://www.veerenstael.nl/wp-content/uploads/2020/06/logo-veerenstael-wit.png" alt="Veerenstael Logo" class="veerenstael-logo" />
-      <div class="subtitle-title">Bijtelling Tool</div>
+      <div class="subtitle-title">Netto bedrijfsuitgave (betaald uit bonus)</div>
     </header>
+
     <div class="main-card">
       <div class="header center-header">
-        <p>Deze Veerenstael-tool laat je je netto bijtelling per maand voor je leaseauto berekenen. Vul je gegevens hieronder in en bekijk direct jouw bijtelling voor de auto van de zaak. In deze tool wordt rekening gehouden met heffingskorting</p>
+        <p>
+          Deze tool rekent uit hoeveel je <b>netto</b> zelf kwijt bent aan een uitgave die
+          met je <b>bruto bonus</b> wordt verrekend. De volgorde van rekenen:
+          <br />1) eventuele bijdrage van Veerenstael eraf, 2) btw verwijderen,
+          3) verrekenen met je BT-LH% (witte tabel).
+        </p>
       </div>
+
       <div class="content-grid">
         <section class="input-pane">
-          <form id="bijtelling-form">
-            <label for="belastingjaar">Belastingjaar</label>
-            <select id="belastingjaar">
-              <option value="2025">2025</option>
+          <form id="bonus-tool-form">
+            <label for="website-bedrag">Bedrag op website (€)</label>
+            <input type="number" id="website-bedrag" min="0" step="0.01" placeholder="bijv. 1000" required />
+
+            <label for="btw-tarief">BTW-tarief</label>
+            <select id="btw-tarief">
+              <option value="21">21%</option>
+              <option value="9">9%</option>
+              <option value="0">0%</option>
             </select>
 
-            <label for="kentekenjaar">Jaar van op kenteken zetten</label>
-            <select id="kentekenjaar">
-              <option value="2019">2019</option>
-              <option value="2020">2020</option>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
+            <label for="incl-btw">Bedrag op website is inclusief btw?</label>
+            <select id="incl-btw">
+              <option value="ja" selected>Ja, incl. btw</option>
+              <option value="nee">Nee, excl. btw</option>
             </select>
 
-            <label for="elektrisch-auto">Rij je elektrisch?</label>
-            <select id="elektrisch-auto">
-              <option value="ja">Ja</option>
-              <option value="nee">Nee, ik rij benzine</option>
-            </select>
+            <label for="veerenstael-bijdrage">Bijdrage Veerenstael (€)</label>
+            <input type="number" id="veerenstael-bijdrage" min="0" step="0.01" placeholder="bijv. 400" value="0" />
 
-            <label for="cataloguswaarde">Cataloguswaarde van de auto (€)</label>
-            <input type="number" id="cataloguswaarde" required>
-
-            <label for="bruto-jaarinkomen">Bruto jaarinkomen (€), incl. (geschat) incentive</label>
-            <input type="number" id="bruto-jaarinkomen" required>
-
-            <label for="eigen-bijdrage">Eigen bijdrage (€)</label>
-            <input type="number" id="eigen-bijdrage" required>
+            <label for="bt-lh">BT-LH % (witte tabel)</label>
+            <input type="number" id="bt-lh" min="0" max="100" step="0.001" placeholder="bijv. 50.330" required />
 
             <div class="button-row">
-              <button type="submit" class="green">Bereken Bijtelling</button>
+              <button type="submit" class="green">Bereken netto uitgave</button>
               <button type="reset" class="reset-btn">Reset</button>
             </div>
           </form>
         </section>
+
         <section class="output-pane">
           <div id="resultaat" class="result-block">
-            <h2>Jouw bijtelling:</h2>
-            <div class="result-bedrag">€<span id="bijtelling-bedrag">0.00</span></div>
+            <h2>Netto bedrag dat je zelf betaalt</h2>
+            <div class="result-bedrag">€<span id="netto-bedrag">0,00</span></div>
           </div>
+
           <div id="extra-informatie" class="info-block">
             <p id="info"></p>
           </div>
@@ -72,6 +69,7 @@
       </div>
     </div>
   </div>
+
   <script src="main.js"></script>
 </body>
 </html>
