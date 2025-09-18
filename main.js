@@ -59,12 +59,12 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
     ["Aankoopbedrag (incl. btw)", `€ ${formatEuro(websiteBedrag)}`],
     ["Bijdrage van Veerenstael", `− € ${formatEuro(bijdrage)}`],
     ["<i>Na bijdrage</i>", `€ ${formatEuro(naBijdrage)}`],
-    [`Omzetbelasting (btw) (${pctDisplay(btwTariefPct)}%)`, `− € ${formatEuro(btwBedrag)}`],
+    ["Omzetbelasting (btw) ", `− € ${formatEuro(btwBedrag)}`],
     ["<i>Bedrag exclusief btw</i>", `€ ${formatEuro(exclBtw)}`],
-    ["Werkgeverslasten", `€ ${formatEuro(brutoOpStrook)}`],
-    [`Bijzonder tarief (${pctDisplay(btLhPct)}%)`, `€ ${formatEuro(nettoPersoonlijk)}`],
-    ["—", "—"],
-    ["Netto bijdrage medewerker", `€ ${formatEuro(nettoEffectPer1000)}`]
+    ["Na werkgeverslasten", `€ ${formatEuro(brutoOpStrook)}`],
+    ["Na heffing bijzonder tariefH%)", `€ ${formatEuro(nettoPersoonlijk)}`],
+    ["<b>Netto bijdrage medewerker</b>", `<b>€ ${formatEuro(nettoEffectPer1000)}</b>`]
+
   ];
 
   let html = '<div class="kv-grid">';
@@ -81,3 +81,4 @@ document.getElementById("bonus-tool-form").addEventListener("reset", function ()
     document.getElementById("info").textContent = "";
   }, 0);
 });
+
