@@ -63,7 +63,7 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
     ["<i>Bedrag exclusief btw</i>", `€ ${formatEuro(exclBtw)}`],
 
     [`Werkgeverslasten (${pctDisplay(WG_LAST_PCT)}%)`, `− € ${formatEuro(wgLastBedrag)}`],
-    ["<i>Na werkgeverslasten (bruto op loonstrook)</i>", `€ ${formatEuro(brutoOpStrook)}`],
+    ["<i>Na werkgeverslasten <br>(bruto incentive op loonstrook)</i>", `€ ${formatEuro(brutoOpStrook)}`],
 
     [`Heffing bijzonder tarief (${pctDisplay(btLhPct)}%)`, `− € ${formatEuro(btLhBedrag)}`],
     ["<b>Netto bijdrage medewerker</b>", `<b>€ ${formatEuro(nettoPersoonlijk)}</b>`]
@@ -83,3 +83,4 @@ document.getElementById("bonus-tool-form").addEventListener("reset", function ()
     document.getElementById("info").textContent = "";
   }, 0);
 });
+
