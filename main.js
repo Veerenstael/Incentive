@@ -62,10 +62,8 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
     ["Omzetbelasting (btw) ", `− € ${formatEuro(btwBedrag)}`],
     ["<i>Bedrag exclusief btw</i>", `€ ${formatEuro(exclBtw)}`],
     ["Na werkgeverslasten", `€ ${formatEuro(brutoOpStrook)}`],
-    ["Na heffing bijzonder tariefH%)", `€ ${formatEuro(nettoPersoonlijk)}`],
-    ["<b>Netto bijdrage medewerker</b>", `<b>€ ${formatEuro(nettoEffectPer1000)}</b>`]
-
-  ];
+    ["Na heffing bijzonder tarief", `€ ${formatEuro(nettoPersoonlijk)}`],
+      ];
 
   let html = '<div class="kv-grid">';
   for (const [label, value] of rows) {
@@ -81,4 +79,5 @@ document.getElementById("bonus-tool-form").addEventListener("reset", function ()
     document.getElementById("info").textContent = "";
   }, 0);
 });
+
 
