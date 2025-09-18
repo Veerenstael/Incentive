@@ -9,8 +9,10 @@
 
 function formatEuro(n) {
   if (!isFinite(n)) return "0,00";
-  // We laten het euroteken los in de value-weergave (consistent met bestaande UI)
-  return n.toLocaleString("nl-NL", { style: "currency", currency: "EUR" }).replace("€", "").trim();
+  return n
+    .toLocaleString("nl-NL", { style: "currency", currency: "EUR" })
+    .replace("€", "")
+    .trim();
 }
 
 function pctDisplay(p) {
@@ -38,17 +40,18 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
 
   // 3) Werkgeverslasten
   const wgLast = wgLastPct / 100;
-  const brutoOpStrook = (1 - wgLast) * exclBtw; // dit is wat als "bruto bonus" op de loonstrook terecht komt
+  const brutoOpStrook = (1 - wgLast) * exclBtw; // “bruto bonus” op loonstrook
 
   // 4) BT-LH toepassen
   const btLh = btLhPct / 100;
   const nettoPersoonlijk = (1 - btLh) * brutoOpStrook;
 
-  // Extra: marginale factor per €1 aankoop incl. btw
-  const marginaleNettoFactorPerEuroIncl = (1 - btLh) * (1 - wgLast) / (1 + (btwTariefPct / 100));
+  // Extra: marginale factor per €1 aankoop incl. btw en indicatie per €1.000
+  const marginaleNettoFactorPerEuroIncl =
+    (1 - btLh) * (1 - wgLast) / (1 + (btwTariefPct / 100));
   const nettoEffectPer1000 = marginaleNettoFactorPerEuroIncl * 1000;
 
-  // Resultaatbedrag
+  // Resultaatbedrag prominent
   document.getElementById("netto-bedrag").textContent = formatEuro(nettoPersoonlijk);
 
   // Uitlijning in 2 kolommen met volledig uitgeschreven labels
@@ -56,10 +59,10 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
     ["Aankoopbedrag (incl. btw)", `€ ${formatEuro(websiteBedrag)}`],
     ["Bijdrage van Veerenstael", `− € ${formatEuro(bijdrage)}`],
     ["<i>Na bijdrage</i>", `€ ${formatEuro(naBijdrage)}`],
-    [`Omzetbelasting (btw) (${btwTariefPct}%)`, `− € ${formatEuro(btwBedrag)}`],
+    [`Omzetbelasting (btw) (${pctDisplay(btwTariefPct)}%)`, `− € ${formatEuro(btwBedrag)}`],
     ["<i>Bedrag exclusief btw</i>", `€ ${formatEuro(exclBtw)}`],
-    [`Werkgeverslasten`, `€ ${formatEuro(brutoOpStrook)}`],
-    [`Bijzonder tarief, `€ ${formatEuro(nettoPersoonlijk)}`],
+    ["Werkgeverslasten", `€ ${formatEuro(brutoOpStrook)}`],
+    [`Bijzonder tarief (${pctDisplay(btLhPct)}%)`, `€ ${formatEuro(nettoPersoonlijk)}`],
     ["—", "—"],
     ["Netto bijdrage medewerker", `€ ${formatEuro(nettoEffectPer1000)}`]
   ];
@@ -68,7 +71,7 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
   for (const [label, value] of rows) {
     html += `<div class="kv-row"><div class="kv-label">${label}:</div><div class="kv-value">${value}</div></div>`;
   }
-  html += '</div>';
+  html += "</div>";
   document.getElementById("info").innerHTML = html;
 });
 
@@ -78,4 +81,3 @@ document.getElementById("bonus-tool-form").addEventListener("reset", function ()
     document.getElementById("info").textContent = "";
   }, 0);
 });
-
