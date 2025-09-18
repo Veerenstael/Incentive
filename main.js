@@ -1,16 +1,20 @@
-/* Netto bedrijfsuitgave via incentive — berekeningslogica
+/* Netto bedrijfsuitgave via incentive — berekeningslogica (aangepast op verzoek)
    Volgorde:
    1) Bijdrage van Veerenstael eraf van het aankoopbedrag (incl. btw)
    2) Btw verwijderen: excl = tussenstand / (1 + btw%)
-   3) Verrekenen met BT-LH% (witte tabel): netto = excl × (1 − BT-LH%)
+   3) Werkgeverslasten toepassen: bruto op loonstrook = (1 - WG%) * excl
+   4) Bijzonder tarief (BT-LH %) toepassen op brutobedrag van de loonstrook
+      Netto bijdrage medewerker = (1 - BT-LH%) * (1 - WG%) * excl
 */
 
 function formatEuro(n) {
   if (!isFinite(n)) return "0,00";
+  // We laten het euroteken los in de value-weergave (consistent met bestaande UI)
   return n.toLocaleString("nl-NL", { style: "currency", currency: "EUR" }).replace("€", "").trim();
 }
 
 function pctDisplay(p) {
+  // Toon altijd 3 decimalen, NL-notatie
   return (Number(p).toFixed(3) + "").replace(".", ",");
 }
 
@@ -20,6 +24,7 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
   const websiteBedrag = parseFloat(document.getElementById("website-bedrag").value) || 0;
   const btwTariefPct = parseFloat(document.getElementById("btw-tarief").value) || 0;
   const bijdrage = Math.max(0, parseFloat(document.getElementById("veerenstael-bijdrage").value) || 0);
+  const wgLastPct = Math.max(0, Math.min(100, parseFloat(document.getElementById("wg-last").value)));
   const btLhPct = Math.max(0, Math.min(100, parseFloat(document.getElementById("bt-lh").value)));
 
   // 1) bijdrage eraf (clamp ondergrens 0)
@@ -28,25 +33,36 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
 
   // 2) btw verwijderen
   const btwFactor = 1 + (btwTariefPct / 100);
-  let exclBtw = btwTariefPct === 0 ? naBijdrage : naBijdrage / btwFactor;
-  let btwBedrag = naBijdrage - exclBtw;
+  const exclBtw = btwTariefPct === 0 ? naBijdrage : naBijdrage / btwFactor;
+  const btwBedrag = naBijdrage - exclBtw;
 
-  // 3) BT-LH verrekenen
+  // 3) Werkgeverslasten
+  const wgLast = wgLastPct / 100;
+  const brutoOpStrook = (1 - wgLast) * exclBtw; // dit is wat als "bruto bonus" op de loonstrook terecht komt
+
+  // 4) BT-LH toepassen
   const btLh = btLhPct / 100;
-  const nettoPersoonlijk = exclBtw * (1 - btLh);
-  const besparingDoorBonus = exclBtw * btLh;
+  const nettoPersoonlijk = (1 - btLh) * brutoOpStrook;
+
+  // Extra: marginale factor per €1 aankoop incl. btw
+  const marginaleNettoFactorPerEuroIncl = (1 - btLh) * (1 - wgLast) / (1 + (btwTariefPct / 100));
+  const nettoEffectPer1000 = marginaleNettoFactorPerEuroIncl * 1000;
 
   // Resultaatbedrag
   document.getElementById("netto-bedrag").textContent = formatEuro(nettoPersoonlijk);
 
   // Uitlijning in 2 kolommen met volledig uitgeschreven labels
   const rows = [
-    ["Aankoopbedrag", `€ ${formatEuro(websiteBedrag)}`],
+    ["Aankoopbedrag (incl. btw)", `€ ${formatEuro(websiteBedrag)}`],
     ["Bijdrage van Veerenstael", `− € ${formatEuro(bijdrage)}`],
     ["<i>Na bijdrage</i>", `€ ${formatEuro(naBijdrage)}`],
     [`Omzetbelasting (btw) (${btwTariefPct}%)`, `− € ${formatEuro(btwBedrag)}`],
     ["<i>Bedrag exclusief btw</i>", `€ ${formatEuro(exclBtw)}`],
-    [`Netto bijdrage medewerker`, `€ ${formatEuro(nettoPersoonlijk)}`]   
+    [`Werkgeverslasten (${pctDisplay(wgLastPct)}%) → bruto op loonstrook`, `€ ${formatEuro(brutoOpStrook)}`],
+    [`Bijzonder tarief (${pctDisplay(btLhPct)}%) → netto bijdrage medewerker`, `€ ${formatEuro(nettoPersoonlijk)}`],
+    ["—", "—"],
+    ["Marginale netto-effect per €1 aankoop (incl. btw)", `€ ${formatEuro(marginaleNettoFactorPerEuroIncl)}`],
+    ["Indicatie: per €1.000 aankoop (incl. btw) netto effect", `€ ${formatEuro(nettoEffectPer1000)}`]
   ];
 
   let html = '<div class="kv-grid">';
@@ -63,4 +79,3 @@ document.getElementById("bonus-tool-form").addEventListener("reset", function ()
     document.getElementById("info").textContent = "";
   }, 0);
 });
-
