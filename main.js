@@ -58,11 +58,10 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
     ["<i>Na bijdrage</i>", `€ ${formatEuro(naBijdrage)}`],
     [`Omzetbelasting (btw) (${btwTariefPct}%)`, `− € ${formatEuro(btwBedrag)}`],
     ["<i>Bedrag exclusief btw</i>", `€ ${formatEuro(exclBtw)}`],
-    [`Werkgeverslasten (${pctDisplay(wgLastPct)}%) → bruto op loonstrook`, `€ ${formatEuro(brutoOpStrook)}`],
-    [`Bijzonder tarief (${pctDisplay(btLhPct)}%) → netto bijdrage medewerker`, `€ ${formatEuro(nettoPersoonlijk)}`],
+    [`Werkgeverslasten`, `€ ${formatEuro(brutoOpStrook)}`],
+    [`Bijzonder tarief, `€ ${formatEuro(nettoPersoonlijk)}`],
     ["—", "—"],
-    ["Marginale netto-effect per €1 aankoop (incl. btw)", `€ ${formatEuro(marginaleNettoFactorPerEuroIncl)}`],
-    ["Indicatie: per €1.000 aankoop (incl. btw) netto effect", `€ ${formatEuro(nettoEffectPer1000)}`]
+    ["Netto bijdrage medewerker", `€ ${formatEuro(nettoEffectPer1000)}`]
   ];
 
   let html = '<div class="kv-grid">';
@@ -79,3 +78,4 @@ document.getElementById("bonus-tool-form").addEventListener("reset", function ()
     document.getElementById("info").textContent = "";
   }, 0);
 });
+
