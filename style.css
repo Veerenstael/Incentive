@@ -8,7 +8,7 @@ body {
 
 .dashboard-bg {
   min-height: 100vh;
-  background: linear-gradient(180deg, #2A6085 0%, #1D1D1B 100%);
+  background: #2A6085;
   display: flex;
   flex-direction: column;
   align-items: center;
