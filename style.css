@@ -1,14 +1,14 @@
 /* Opmaak gebaseerd op de bestaande Veerenstael-tooling */
 body {
   margin: 0;
-  font-family: 'Inter', Arial, sans-serif;
-  background: #203040;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #1D1D1B;
   min-height: 100vh;
 }
 
 .dashboard-bg {
   min-height: 100vh;
-  background: linear-gradient(180deg, #223344 0%, #1a2636 100%);
+  background: linear-gradient(180deg, #2A6085 0%, #1D1D1B 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +32,7 @@ body {
 .subtitle-title {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #fff;
+  color: #FFFFFF;
   letter-spacing: 2px;
   margin-top: 6px;
   margin-bottom: 10px;
@@ -41,13 +41,13 @@ body {
 }
 
 .main-card {
-  background: #222c38;
+  background: #FBF5EC;
   border-radius: 18px;
-  box-shadow: 0 8px 32px #0004;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   padding: 32px 40px;
   max-width: 950px;
   width: 100%;
-  color: #fff;
+  color: #1D1D1B;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -59,7 +59,7 @@ body {
 }
 .header p {
   text-align: center;
-  color: #b8c7e0;
+  color: #1D1D1B;
   margin-top: 4px;
   margin-bottom: 0;
 }
@@ -97,22 +97,24 @@ form label {
   display: block;
   margin-bottom: 6px;
   font-weight: 500;
-  color: #e0e6f0;
+  color: #1D1D1B;
 }
 form input, form select {
   width: 100%;
-  background: #1a2230;
-  color: #e0e0e0;
-  border: none;
+  background: #FFFFFF;
+  color: #1D1D1B;
+  border: 1px solid #BFD4DA;
   border-radius: 9px;
   padding: 12px;
   margin-bottom: 18px;
   font-size: 1rem;
   box-sizing: border-box;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 form input:focus, form select:focus {
-  outline: 2px solid #3e70ff;
+  outline: none;
+  border-color: #2A6085;
+  box-shadow: 0 0 0 3px rgba(42, 96, 133, 0.1);
 }
 
 .button-row {
@@ -132,50 +134,53 @@ button {
   margin-bottom: 12px;
 }
 button.green {
-  background: #13d17c;
-  color: #fff;
+  background: #2A6085;
+  color: #FFFFFF;
 }
 button.green:hover {
-  background: #10b86a;
+  background: #1f4a64;
+  box-shadow: 0 4px 12px rgba(42, 96, 133, 0.3);
 }
 button.reset-btn {
-  background: #23314a;
-  color: #fff;
+  background: #BFD4DA;
+  color: #1D1D1B;
 }
 button.reset-btn:hover {
-  background: #3b4970;
+  background: #a8c3cc;
 }
 
 .result-block {
-  background: #232b3a;
+  background: #FFFFFF;
+  border: 2px solid #2A6085;
   border-radius: 12px;
   padding: 28px 24px 18px 24px;
   margin-bottom: 18px;
-  box-shadow: 0 2px 16px #0002;
+  box-shadow: 0 2px 16px rgba(42, 96, 133, 0.15);
   text-align: center;
 }
 .result-block h2 {
   font-size: 1.3rem;
   margin-top: 0;
   margin-bottom: 10px;
-  color: #b8c7e0;
+  color: #2A6085;
 }
 .result-bedrag {
   font-size: 2.3rem;
   font-weight: bold;
-  color: #13d17c;
+  color: #2A6085;
   margin-top: 2px;
 }
 
 .info-block {
-  background: #232b3a;
+  background: #FFFFFF;
+  border: 1px solid #BFD4DA;
   border-radius: 12px;
   padding: 18px 20px;
-  color: #b8c7e0;
+  color: #1D1D1B;
   font-size: 1rem;
   min-height: 40px;
   margin-top: 8px;
-  box-shadow: 0 1px 8px #0002;
+  box-shadow: 0 1px 8px rgba(42, 96, 133, 0.1);
   word-break: break-word;
 }
 
@@ -192,13 +197,14 @@ button.reset-btn:hover {
 }
 
 .kv-label {
-  color: #d3ddf0;
+  color: #1D1D1B;
 }
 
 .kv-value {
   text-align: right;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  color: #1D1D1B;
 }
 
 @media (max-width: 950px) {
