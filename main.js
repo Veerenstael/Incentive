@@ -1,10 +1,10 @@
-/* Netto bedrijfsuitgave via incentive — berekeningslogica (vast WG-last 15%)
+/* Netto bedrijfsuitgave via incentive - berekeningslogica (WG-last betaald door Veerenstael)
    Volgorde:
    1) Bijdrage van Veerenstael eraf van het aankoopbedrag (incl. btw)
    2) Btw verwijderen: excl = tussenstand / (1 + btw%)
-   3) Werkgeverslasten toepassen: bruto op loonstrook = (1 - 15%) * excl
-   4) Bijzonder tarief (BT-LH %) toepassen op brutobedrag van de loonstrook
-      Netto bijdrage medewerker = (1 - BT-LH%) * (1 - 15%) * excl
+   3) Werkgeverslasten (15%) worden door Veerenstael betaald (niet van netto af)
+   4) Bijzonder tarief (BT-LH %) toepassen op excl. BTW bedrag
+      Netto bijdrage medewerker = (1 - BT-LH%) * excl
 */
 
 function formatEuro(n) {
@@ -28,7 +28,7 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
   const bijdrage = Math.max(0, parseFloat(document.getElementById("veerenstael-bijdrage").value) || 0);
   const btLhPct = Math.max(0, Math.min(100, parseFloat(document.getElementById("bt-lh").value)));
 
-  // Vast percentage werkgeverslasten
+  // Vast percentage werkgeverslasten (voor informatiedoeleinden)
   const WG_LAST_PCT = 15; // % conform personeelshandboek
   const wgLast = WG_LAST_PCT / 100;
 
@@ -41,14 +41,13 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
   const exclBtw = btwTariefPct === 0 ? naBijdrage : naBijdrage / btwFactor;
   const btwBedrag = naBijdrage - exclBtw;
 
-  // 3) Werkgeverslasten (vast 15%)
-  const brutoOpStrook = (1 - wgLast) * exclBtw; // “bruto bonus” op loonstrook
-  const wgLastBedrag = exclBtw * wgLast;        // aftrek werkgeverslasten
+  // 3) Werkgeverslasten (betaald door Veerenstael, alleen ter info)
+  const wgLastBedrag = exclBtw * wgLast;
 
-  // 4) BT-LH toepassen
+  // 4) BT-LH toepassen op excl. BTW bedrag
   const btLh = btLhPct / 100;
-  const btLhBedrag = brutoOpStrook * btLh;       // aftrek bijzonder tarief
-  const nettoPersoonlijk = (1 - btLh) * brutoOpStrook;
+  const btLhBedrag = exclBtw * btLh;
+  const nettoPersoonlijk = (1 - btLh) * exclBtw;
 
   // Resultaat prominent
   document.getElementById("netto-bedrag").textContent = formatEuro(nettoPersoonlijk);
@@ -60,10 +59,9 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
     ["<i>Na bijdrage</i>", `€ ${formatEuro(naBijdrage)}`],
 
     [`Omzetbelasting (btw) (${pctDisplay(btwTariefPct)}%)`, `− € ${formatEuro(btwBedrag)}`],
-    ["<i>Bedrag exclusief btw</i>", `€ ${formatEuro(exclBtw)}`],
+    ["<i>Bedrag exclusief btw <br>(bruto incentive op loonstrook)</i>", `€ ${formatEuro(exclBtw)}`],
 
-    [`Werkgeverslasten (${pctDisplay(WG_LAST_PCT)}%)`, `− € ${formatEuro(wgLastBedrag)}`],
-    ["<i>Na werkgeverslasten <br>(bruto incentive op loonstrook)</i>", `€ ${formatEuro(brutoOpStrook)}`],
+    [`Werkgeverslasten (${pctDisplay(WG_LAST_PCT)}%)<br><i>(betaald door Veerenstael)</i>`, `€ ${formatEuro(wgLastBedrag)}`],
 
     [`Heffing bijzonder tarief (${pctDisplay(btLhPct)}%)`, `− € ${formatEuro(btLhBedrag)}`],
     ["<b>Netto bijdrage medewerker</b>", `<b>€ ${formatEuro(nettoPersoonlijk)}</b>`]
@@ -83,4 +81,3 @@ document.getElementById("bonus-tool-form").addEventListener("reset", function ()
     document.getElementById("info").textContent = "";
   }, 0);
 });
-
