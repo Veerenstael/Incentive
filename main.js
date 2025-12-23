@@ -61,7 +61,10 @@ document.getElementById("bonus-tool-form").addEventListener("submit", function (
     [`Omzetbelasting (btw) (${pctDisplay(btwTariefPct)}%)`, `− € ${formatEuro(btwBedrag)}`],
     ["<i>Bedrag exclusief btw <br>(bruto incentive op loonstrook)</i>", `€ ${formatEuro(exclBtw)}`],
 
-    [`Werkgeverslasten (${pctDisplay(WG_LAST_PCT)}%)<br><i>(betaald door Veerenstael)</i>`, `€ ${formatEuro(wgLastBedrag)}`],
+    ["", ""],
+    [`<i>Werkgeverslasten (${pctDisplay(WG_LAST_PCT)}%)</i>`, `<i>€ ${formatEuro(wgLastBedrag)}</i>`],
+    ["<i>(wordt betaald door Veerenstael)</i>", ""],
+    ["", ""],
 
     [`Heffing bijzonder tarief (${pctDisplay(btLhPct)}%)`, `− € ${formatEuro(btLhBedrag)}`],
     ["<b>Netto bijdrage medewerker</b>", `<b>€ ${formatEuro(nettoPersoonlijk)}</b>`]
