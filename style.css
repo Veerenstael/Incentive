@@ -4,6 +4,7 @@ body {
   font-family: 'Roboto', Arial, sans-serif;
   background: #1D1D1B;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .dashboard-bg {
@@ -13,6 +14,9 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 32px 0;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .logo-header {
@@ -52,6 +56,7 @@ body {
   margin-right: auto;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .header {
@@ -208,22 +213,49 @@ button.reset-btn:hover {
 }
 
 @media (max-width: 950px) {
+  .dashboard-bg {
+    padding: 16px 0;
+  }
   .main-card {
-    padding: 24px 6vw;
-    max-width: 99vw;
+    padding: 20px 16px;
+    max-width: 100%;
+    margin: 0 12px;
+    box-sizing: border-box;
   }
   .content-grid {
     flex-direction: column;
-    gap: 24px;
-    align-items: center;
+    gap: 20px;
+    align-items: stretch;
   }
   .input-pane,
   .output-pane {
     padding: 0;
-    max-width: 99vw;
+    max-width: 100%;
   }
   .veerenstael-logo {
-    width: 90vw;
-    max-width: 98vw;
+    width: 80vw;
+    max-width: 300px;
+  }
+  .subtitle-title {
+    font-size: 1.1rem;
+    padding: 0 12px;
+  }
+  .header p {
+    font-size: 0.9rem;
+    padding: 0 8px;
+  }
+  form input, form select {
+    font-size: 16px; /* Voorkomt zoom op iOS */
+  }
+  .button-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  button {
+    width: 100%;
+  }
+  .kv-grid {
+    gap: 8px 12px;
+    font-size: 0.9rem;
   }
 }
